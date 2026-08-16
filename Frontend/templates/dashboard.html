@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Digital Product Passport</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <div class="dashboard-header">
+
+        <div>
+            <h1>Digital Product Passport</h1>
+            <p>Role-Based Dashboard</p>
+        </div>
+
+        <div class="dashboard-header-actions">
+
+            <a href="{{ url_for('search_product') }}"
+               class="logout-button">
+                Search Product
+            </a>
+
+            <a href="{{ url_for('logout') }}"
+               class="logout-button">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="welcome-card">
+
+        <h2>Welcome, {{ username }}</h2>
+
+        <p>
+            Login Type:
+            <strong>{{ role }}</strong>
+        </p>
+
+        <p class="dashboard-description">
+            You are logged in to the Digital Product Passport system.
+        </p>
+
+    </div>
+
+
+    {% if role == "Admin" %}
+
+    <div class="dashboard-card">
+
+        <h2>Admin Dashboard</h2>
+
+        <div class="dashboard-grid">
+
+            <a href="{{ url_for('search_product') }}"
+               class="dashboard-item dashboard-item-link">
+                <h3>Products</h3>
+                <p>Search and view product passports.</p>
+            </a>
+
+            <a href="{{ url_for('register_product') }}"
+               class="dashboard-item dashboard-item-link">
+                <h3>Register Product</h3>
+                <p>Register a new product.</p>
+            </a>
+
+            <div class="dashboard-item">
+                <h3>Manufacturers</h3>
+                <p>Manage manufacturer information.</p>
+            </div>
+
+            <div class="dashboard-item">
+                <h3>Suppliers</h3>
+                <p>Manage supplier information.</p>
+            </div>
+
+            <div class="dashboard-item">
+                <h3>Customers</h3>
+                <p>Manage customer information.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {% elif role == "Manufacturer" %}
+
+    <div class="dashboard-card">
+
+        <h2>Manufacturer Dashboard</h2>
+
+        <div class="dashboard-grid">
+
+            <a href="{{ url_for('register_product') }}"
+               class="dashboard-item dashboard-item-link">
+
+                <h3>Register New Product</h3>
+
+                <p>
+                    Register a product and automatically
+                    generate its Product ID.
+                </p>
+
+            </a>
+
+            <a href="{{ url_for('search_product') }}"
+               class="dashboard-item dashboard-item-link">
+
+                <h3>Search Product</h3>
+
+                <p>
+                    Search and view product passports.
+                </p>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    {% elif role == "Customer" %}
+
+    <div class="dashboard-card">
+
+        <h2>Customer Dashboard</h2>
+
+        <div class="dashboard-grid">
+
+            <a href="{{ url_for('search_product') }}"
+               class="dashboard-item dashboard-item-link">
+
+                <h3>Search Product</h3>
+
+                <p>
+                    Search and view complete product lifecycle information.
+                </p>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    {% elif role == "Supplier" %}
+
+    <div class="dashboard-card">
+
+        <h2>Supplier Dashboard</h2>
+
+        <div class="dashboard-grid">
+
+            <a href="{{ url_for('search_product') }}"
+               class="dashboard-item dashboard-item-link">
+
+                <h3>Search Product</h3>
+
+                <p>
+                    View supplied product information.
+                </p>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    {% elif role == "Service Center" %}
+
+    <div class="dashboard-card">
+
+        <h2>Service Center Dashboard</h2>
+
+        <div class="dashboard-grid">
+
+            <a href="{{ url_for('search_product') }}"
+               class="dashboard-item dashboard-item-link">
+
+                <h3>Search Product</h3>
+
+                <p>
+                    View product information before servicing.
+                </p>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    {% elif role == "Recycler" %}
+
+    <div class="dashboard-card">
+
+        <h2>Recycler Dashboard</h2>
+
+        <div class="dashboard-grid">
+
+            <a href="{{ url_for('search_product') }}"
+               class="dashboard-item dashboard-item-link">
+
+                <h3>Search Product</h3>
+
+                <p>
+                    View product lifecycle and recycling information.
+                </p>
+
+            </a>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <div class="dashboard-card">
+
+        <h2>Product Search</h2>
+
+        <p>
+            Search for a product using its Product ID.
+        </p>
+
+        <a href="{{ url_for('search_product') }}"
+           class="dashboard-link">
+            Search Products
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

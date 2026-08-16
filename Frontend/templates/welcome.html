@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Digital Product Passport</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="welcome-page">
+
+    <div class="welcome-card">
+
+        <div class="welcome-badge">
+            DIGITAL PRODUCT PASSPORT
+        </div>
+
+        <h1>
+            Welcome to the Digital Product Passport
+        </h1>
+
+        <p class="welcome-subtitle">
+            Product Lifecycle Traceability System
+        </p>
+
+        <p class="welcome-text">
+            Securely manage and trace product information,
+            components, warranty, service history, ownership
+            and recycling information throughout the complete
+            product lifecycle.
+        </p>
+
+        <div class="welcome-action">
+            <a href="{{ url_for('login') }}"
+               class="primary-button">
+                Login to Continue
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

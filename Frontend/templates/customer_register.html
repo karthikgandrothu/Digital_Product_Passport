@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Registration - Digital Product Passport</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="login-card register-card">
+
+        <div class="login-logo">DPP</div>
+
+        <h1>Create Account</h1>
+
+        <p class="login-subtitle">
+            Register as a Customer
+        </p>
+
+        {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="POST"
+              action="{{ url_for('customer_register_process') }}">
+
+            <div class="login-field">
+                <label for="username">Username</label>
+
+                <input type="text"
+                       id="username"
+                       name="username"
+                       placeholder="Create username"
+                       value="{{ username or '' }}"
+                       required>
+            </div>
+
+            <div class="login-field">
+                <label for="email">Email</label>
+
+                <input type="email"
+                       id="email"
+                       name="email"
+                       placeholder="Enter email address"
+                       value="{{ email or '' }}"
+                       required>
+            </div>
+
+            <div class="login-field">
+                <label for="password">Password</label>
+
+                <input type="password"
+                       id="password"
+                       name="password"
+                       placeholder="Create password"
+                       required>
+            </div>
+
+            <div class="login-field">
+                <label for="confirm_password">
+                    Confirm Password
+                </label>
+
+                <input type="password"
+                       id="confirm_password"
+                       name="confirm_password"
+                       placeholder="Confirm password"
+                       required>
+            </div>
+
+            <button type="submit"
+                    class="login-button">
+                Create Customer Account
+            </button>
+
+        </form>
+
+        <div class="login-register">
+
+            <p>Already have an account?</p>
+
+            <a href="{{ url_for('login', role='Customer') }}">
+                Login Here
+            </a>
+
+        </div>
+
+        <div class="login-back">
+
+            <a href="{{ url_for('home') }}">
+                ← Back to Welcome Page
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

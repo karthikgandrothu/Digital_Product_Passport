@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Digital Product Passport</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <div class="login-logo">DPP</div>
+
+        <h1>Digital Product Passport</h1>
+
+        <p class="login-subtitle">
+            Login to your account
+        </p>
+
+        {% if success %}
+        <div class="success-message">{{ success }}</div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form action="{{ url_for('login_process') }}"
+              method="POST">
+
+            <div class="login-field">
+                <label for="login_type">Login As</label>
+
+                <select id="login_type"
+                        name="login_type"
+                        class="login-select"
+                        required>
+
+                    <option value="Customer"
+                        {% if selected_role == "Customer" or not selected_role %}selected{% endif %}>
+                        Customer
+                    </option>
+
+                    <option value="Admin"
+                        {% if selected_role == "Admin" %}selected{% endif %}>
+                        Admin
+                    </option>
+
+                    <option value="Manufacturer"
+                        {% if selected_role == "Manufacturer" %}selected{% endif %}>
+                        Manufacturer
+                    </option>
+
+                    <option value="Supplier"
+                        {% if selected_role == "Supplier" %}selected{% endif %}>
+                        Supplier
+                    </option>
+
+                    <option value="Service Center"
+                        {% if selected_role == "Service Center" %}selected{% endif %}>
+                        Service Center
+                    </option>
+
+                    <option value="Recycler"
+                        {% if selected_role == "Recycler" %}selected{% endif %}>
+                        Recycler
+                    </option>
+
+                </select>
+            </div>
+
+            <div class="login-field">
+                <label for="username">Username</label>
+
+                <input type="text"
+                       id="username"
+                       name="username"
+                       placeholder="Enter username"
+                       value="{{ entered_username or '' }}"
+                       required>
+            </div>
+
+            <div class="login-field">
+                <label for="password">Password</label>
+
+                <input type="password"
+                       id="password"
+                       name="password"
+                       placeholder="Enter password"
+                       required>
+            </div>
+
+            <button type="submit"
+                    class="login-button">
+                Login
+            </button>
+
+        </form>
+
+        <div class="login-register">
+
+            <p id="register-text">
+                Don't have a Customer account?
+            </p>
+
+            <a id="register-link"
+               href="{{ url_for('customer_register') }}">
+                Create Customer Account
+            </a>
+
+        </div>
+
+        <div class="login-back">
+
+            <a href="{{ url_for('home') }}">
+                ← Back to Welcome Page
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const loginType = document.getElementById("login_type");
+const registerLink = document.getElementById("register-link");
+const registerText = document.getElementById("register-text");
+
+function updateRegistrationLink() {
+
+    const role = loginType.value;
+
+    const pages = {
+        "Customer": {
+            url: "{{ url_for('customer_register') }}",
+            text: "Create Customer Account",
+            question: "Don't have a Customer account?"
+        },
+        "Manufacturer": {
+            url: "{{ url_for('manufacturer_register') }}",
+            text: "Create Manufacturer Account",
+            question: "Don't have a Manufacturer account?"
+        },
+        "Supplier": {
+            url: "{{ url_for('supplier_register') }}",
+            text: "Create Supplier Account",
+            question: "Don't have a Supplier account?"
+        },
+        "Service Center": {
+            url: "{{ url_for('service_center_register') }}",
+            text: "Create Service Center Account",
+            question: "Don't have a Service Center account?"
+        },
+        "Recycler": {
+            url: "{{ url_for('recycler_register') }}",
+            text: "Create Recycler Account",
+            question: "Don't have a Recycler account?"
+        }
+    };
+
+    if (role === "Admin") {
+        registerLink.href = "#";
+        registerLink.textContent = "Admin Registration Restricted";
+        registerText.textContent =
+            "Administrator accounts are managed by the system administrator.";
+        return;
+    }
+
+    const page = pages[role];
+
+    registerLink.href = page.url;
+    registerLink.textContent = page.text;
+    registerText.textContent = page.question;
+}
+
+loginType.addEventListener("change", updateRegistrationLink);
+updateRegistrationLink();
+
+</script>
+
+</body>
+</html>

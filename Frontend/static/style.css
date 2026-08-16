@@ -1,0 +1,533 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #222;
+}
+
+a {
+    color: inherit;
+}
+
+.container,
+.dashboard-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.header h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: #666;
+    font-size: 18px;
+}
+
+.card,
+.search-box,
+.welcome-card,
+.dashboard-card,
+.welcome-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.search-box {
+    padding: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.search-box h2 {
+    margin-bottom: 20px;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-box input {
+    width: 65%;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.search-box button,
+.primary-button,
+.login-button {
+    padding: 14px 25px;
+    border: none;
+    border-radius: 6px;
+    background-color: #222;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.search-box button:hover,
+.primary-button:hover,
+.login-button:hover {
+    background-color: #444;
+}
+
+.card {
+    padding: 30px;
+    margin-bottom: 25px;
+}
+
+.section-title {
+    border-bottom: 2px solid #eee;
+    padding-bottom: 12px;
+    margin-bottom: 25px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.product-grid div {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+}
+
+.product-grid strong {
+    display: block;
+    margin-bottom: 7px;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #222;
+    color: white;
+    padding: 13px;
+    text-align: left;
+}
+
+td {
+    padding: 13px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f7f7f7;
+}
+
+.timeline {
+    border-left: 3px solid #222;
+    padding-left: 25px;
+}
+
+.timeline-item {
+    background-color: #f8f9fa;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.timeline-item h3 {
+    margin-bottom: 15px;
+}
+
+.timeline-item p {
+    margin-bottom: 8px;
+}
+
+.no-data {
+    color: #777;
+    font-style: italic;
+}
+
+.error {
+    background-color: #ffe5e5;
+    color: #c00000;
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.success-message {
+    background-color: #e7f6e7;
+    color: #176b17;
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.welcome-page,
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-card {
+    width: 650px;
+    max-width: 90%;
+    padding: 55px;
+    text-align: center;
+}
+
+.welcome-badge,
+.page-badge {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+.welcome-card h1 {
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.welcome-subtitle {
+    color: #666;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.welcome-text {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.login-card {
+    width: 420px;
+    max-width: 92%;
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+}
+
+.login-logo {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #222;
+    color: white;
+    font-weight: bold;
+}
+
+.login-card h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.login-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.login-field {
+    margin-bottom: 20px;
+}
+
+.login-field label,
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.login-card input,
+.login-select,
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: white;
+}
+
+.login-button {
+    width: 100%;
+}
+
+.login-register {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.login-register p {
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.login-register a,
+.login-back a,
+.form-actions a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-register a:hover,
+.login-back a:hover,
+.form-actions a:hover {
+    text-decoration: underline;
+}
+
+.login-back {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.dashboard-header h1 {
+    margin-bottom: 5px;
+}
+
+.dashboard-header p {
+    color: #666;
+}
+
+.dashboard-header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.logout-button {
+    padding: 12px 22px;
+    background-color: #222;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.welcome-card {
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.welcome-card h2 {
+    margin-bottom: 10px;
+}
+
+.dashboard-card {
+    padding: 30px;
+    margin-bottom: 25px;
+}
+
+.dashboard-card h2 {
+    margin-bottom: 20px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.dashboard-item {
+    padding: 25px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.dashboard-item h3 {
+    margin-bottom: 10px;
+}
+
+.dashboard-item p {
+    color: #666;
+    line-height: 1.5;
+}
+
+.dashboard-item-link {
+    text-decoration: none;
+    color: #222;
+}
+
+.dashboard-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 22px;
+    background-color: #222;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.top-bar {
+    width: 100%;
+    padding: 15px 5%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.system-name {
+    font-weight: bold;
+}
+
+.top-bar-right {
+    display: flex;
+    gap: 10px;
+}
+
+.form-page {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+.form-card {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.page-heading {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.page-heading h1 {
+    margin-bottom: 10px;
+}
+
+.page-heading p {
+    color: #666;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 5px;
+}
+
+.product-id-info {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.product-id-info h3 {
+    margin-bottom: 8px;
+}
+
+.product-id-info p {
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.form-actions {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.secondary-button {
+    background-color: #555;
+}
+
+@media (max-width: 768px) {
+
+    .container,
+    .dashboard-container,
+    .form-page {
+        width: 95%;
+    }
+
+    .product-grid,
+    .dashboard-grid,
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .search-form {
+        flex-direction: column;
+    }
+
+    .search-box input,
+    .search-box button {
+        width: 100%;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dashboard-header-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .dashboard-header-actions a {
+        text-align: center;
+    }
+
+    .top-bar {
+        flex-direction: column;
+        gap: 12px;
+    }
+}

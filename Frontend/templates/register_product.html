@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register Product - Digital Product Passport</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="top-bar">
+
+    <div class="top-bar-left">
+        <span class="system-name">
+            Digital Product Passport
+        </span>
+    </div>
+
+    <div class="top-bar-right">
+
+        <a href="{{ url_for('dashboard') }}"
+           class="login-button">
+            Dashboard
+        </a>
+
+        <a href="{{ url_for('logout') }}"
+           class="login-button">
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="form-page">
+
+    <div class="form-card">
+
+        <div class="page-heading">
+
+            <div class="page-badge">
+                PRODUCT REGISTRATION
+            </div>
+
+            <h1>Register New Product</h1>
+
+            <p>
+                Register a new product in the Digital Product Passport system.
+            </p>
+
+        </div>
+
+
+        {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+        {% endif %}
+
+
+        <form action="{{ url_for('register_product_process') }}"
+              method="POST">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="product_name">
+                        Product Name
+                    </label>
+
+                    <input type="text"
+                           id="product_name"
+                           name="product_name"
+                           placeholder="Enter product name"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="serial_number">
+                        Serial Number
+                    </label>
+
+                    <input type="text"
+                           id="serial_number"
+                           name="serial_number"
+                           placeholder="Enter serial number"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="manufacturer_id">
+                        Manufacturer
+                    </label>
+
+                    <select id="manufacturer_id"
+                            name="manufacturer_id"
+                            required>
+
+                        <option value="">
+                            Select manufacturer
+                        </option>
+
+                        {% for manufacturer in manufacturers %}
+
+                        <option value="{{ manufacturer.manufacturer_id }}">
+                            {{ manufacturer.manufacturer_name }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="supplier_id">
+                        Supplier
+                    </label>
+
+                    <select id="supplier_id"
+                            name="supplier_id">
+
+                        <option value="">
+                            Select supplier
+                        </option>
+
+                        {% for supplier in suppliers %}
+
+                        <option value="{{ supplier.supplier_id }}">
+                            {{ supplier.supplier_name }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="manufacture_date">
+                        Manufacture Date
+                    </label>
+
+                    <input type="date"
+                           id="manufacture_date"
+                           name="manufacture_date"
+                           required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="purchase_date">
+                        Purchase Date
+                    </label>
+
+                    <input type="date"
+                           id="purchase_date"
+                           name="purchase_date">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="status">
+                        Product Status
+                    </label>
+
+                    <select id="status"
+                            name="status">
+
+                        <option value="Active">
+                            Active
+                        </option>
+
+                        <option value="Inactive">
+                            Inactive
+                        </option>
+
+                        <option value="Retired">
+                            Retired
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="product-id-info">
+
+                <h3>
+                    Product ID
+                </h3>
+
+                <p>
+                    The system automatically generates a unique
+                    Product ID after registration.
+                </p>
+
+                <p>
+                    Example:
+                    <strong>P000001</strong>,
+                    <strong>P000002</strong>,
+                    <strong>P000003</strong>
+                </p>
+
+            </div>
+
+
+            <button type="submit"
+                    class="primary-button full-width">
+
+                Register Product
+
+            </button>
+
+        </form>
+
+
+        <div class="form-actions">
+
+            <a href="{{ url_for('dashboard') }}">
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Product Passport - Digital Product Passport
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>
+            Digital Product Passport
+        </h1>
+
+        <p>
+            Product Lifecycle Traceability
+        </p>
+
+    </div>
+
+
+    {% if error %}
+
+    <div class="error">
+        {{ error }}
+    </div>
+
+    {% endif %}
+
+
+    <div class="search-box">
+
+        <h2>
+            Search Product
+        </h2>
+
+        <form action="{{ url_for('search_product') }}"
+              method="POST"
+              class="search-form">
+
+            <input
+                type="text"
+                name="product_code"
+                placeholder="Enter Product ID e.g. P000001"
+                value="{{ searched_product_code or '' }}"
+                autocomplete="off"
+                required>
+
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+
+    </div>
+
+
+    {% if product %}
+
+    <div class="card">
+
+        <div class="section-title">
+            <h2>Product Information</h2>
+        </div>
+
+        <div class="product-grid">
+
+            <div>
+                <strong>Product ID</strong>
+                {{ product.product_code }}
+            </div>
+
+            <div>
+                <strong>Product Name</strong>
+                {{ product.product_name }}
+            </div>
+
+            <div>
+                <strong>Serial Number</strong>
+                {{ product.serial_number }}
+            </div>
+
+            <div>
+                <strong>Manufacturer</strong>
+                {{ product.manufacturer_name }}
+            </div>
+
+            <div>
+                <strong>Supplier</strong>
+                {{ product.supplier_name or "Not Available" }}
+            </div>
+
+            <div>
+                <strong>Manufacture Date</strong>
+                {{ product.manufacture_date }}
+            </div>
+
+            <div>
+                <strong>Purchase Date</strong>
+                {{ product.purchase_date or "Not Available" }}
+            </div>
+
+            <div>
+                <strong>Status</strong>
+                <span class="status">
+                    {{ product.status }}
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {% if qr_image_url %}
+
+    <div class="card qr-card">
+
+        <div class="section-title">
+            <h2>Product QR Code</h2>
+        </div>
+
+        <div class="qr-content">
+
+            <img src="{{ qr_image_url }}"
+                 alt="Product QR Code"
+                 class="qr-image">
+
+            <div class="qr-details">
+
+                <p>
+                    Scan this QR code to open the
+                    product passport.
+                </p>
+
+                <p>
+                    Product ID:
+                    <strong>
+                        {{ product.product_code }}
+                    </strong>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    <div class="card">
+
+        <div class="section-title">
+            <h2>Components</h2>
+        </div>
+
+        {% if components %}
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Component</th>
+                        <th>Serial No.</th>
+                        <th>Manufacturer</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Installation Date</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for component in components %}
+
+                    <tr>
+
+                        <td>{{ component.component_name }}</td>
+                        <td>{{ component.component_serial_no }}</td>
+                        <td>{{ component.manufacturer }}</td>
+                        <td>{{ component.description }}</td>
+                        <td>{{ component.quantity }}</td>
+                        <td>{{ component.installation_date }}</td>
+                        <td>{{ component.status }}</td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <p class="no-data">
+            No component information available.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="section-title">
+            <h2>Warranty</h2>
+        </div>
+
+        {% if warranty %}
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Type</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Terms</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for item in warranty %}
+
+                    <tr>
+
+                        <td>{{ item.warranty_type }}</td>
+                        <td>{{ item.warranty_start }}</td>
+                        <td>{{ item.warranty_end }}</td>
+                        <td>{{ item.terms }}</td>
+                        <td>{{ item.status }}</td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <p class="no-data">
+            No warranty information available.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="section-title">
+            <h2>Service History</h2>
+        </div>
+
+        {% if service_history %}
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Service Center</th>
+                        <th>Date</th>
+                        <th>Problem</th>
+                        <th>Service Type</th>
+                        <th>Parts Replaced</th>
+                        <th>Cost</th>
+                        <th>Status</th>
+                        <th>Remarks</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for item in service_history %}
+
+                    <tr>
+
+                        <td>{{ item.center_name }}</td>
+                        <td>{{ item.service_date }}</td>
+                        <td>{{ item.problem_description }}</td>
+                        <td>{{ item.service_type }}</td>
+                        <td>{{ item.parts_replaced }}</td>
+                        <td>{{ item.service_cost }}</td>
+                        <td>{{ item.service_status }}</td>
+                        <td>{{ item.remarks }}</td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <p class="no-data">
+            No service history available.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="section-title">
+            <h2>Ownership History</h2>
+        </div>
+
+        {% if ownership_history %}
+
+        <div class="timeline">
+
+            {% for item in ownership_history %}
+
+            <div class="timeline-item">
+
+                <h3>
+                    {{ item.customer_name }}
+                </h3>
+
+                <p>
+                    <strong>Phone:</strong>
+                    {{ item.phone }}
+                </p>
+
+                <p>
+                    <strong>Email:</strong>
+                    {{ item.email }}
+                </p>
+
+                <p>
+                    <strong>Ownership Start:</strong>
+                    {{ item.ownership_start }}
+                </p>
+
+                <p>
+                    <strong>Ownership End:</strong>
+                    {{ item.ownership_end or "Current Owner" }}
+                </p>
+
+                <p>
+                    <strong>Transfer Date:</strong>
+                    {{ item.transfer_date or "N/A" }}
+                </p>
+
+                <p>
+                    <strong>Reason:</strong>
+                    {{ item.transfer_reason or "N/A" }}
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <p class="no-data">
+            No ownership history available.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="section-title">
+            <h2>Recycling</h2>
+        </div>
+
+        {% if recycling %}
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Recycler</th>
+                        <th>Reason</th>
+                        <th>Recovered Material</th>
+                        <th>Status</th>
+                        <th>Remarks</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for item in recycling %}
+
+                    <tr>
+
+                        <td>{{ item.recycling_date }}</td>
+                        <td>{{ item.recycler_name }}</td>
+                        <td>{{ item.recycling_reason }}</td>
+                        <td>{{ item.recovered_material }}</td>
+                        <td>{{ item.status }}</td>
+                        <td>{{ item.remarks }}</td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <p class="no-data">
+            No recycling information available.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+
+    <div class="login-back">
+
+        <a href="{{ url_for('dashboard') }}">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>
